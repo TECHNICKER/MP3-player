@@ -86,7 +86,7 @@ class Folder:
 
 Folder.build_playlist()
 
-# testovací printy
+# testovací printy - je možné vyzkoušet se "Sto chvalospevov"
 
 # pro hudbu čistě ve složce music - tady budou velké změny
 # print(Folder.playlist)
@@ -249,4 +249,3 @@ while True:
 
     mx.music.set_volume(volume)
 
-    
