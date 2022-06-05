@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist xmlns="http://xspf.org/ns/0/" xmlns:vlc="http://www.videolan.org/vlc/playlist/ns/0/" version="1">
+	<title>Playlist</title>
+	<trackList>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/4_Olivovy%20olej/01%20Kadosh.mp3</location>
+			<duration>298110</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>0</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/4_Olivovy%20olej/02%20K%20Tebe%20prichadzam.mp3</location>
+			<duration>306400</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>1</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/4_Olivovy%20olej/03%20Milujem%20Ta.mp3</location>
+			<duration>240436</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>2</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/4_Olivovy%20olej/04%20Citis%20jak%20sa%20hory%20chveju.mp3</location>
+			<duration>388824</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>3</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/4_Olivovy%20olej/05%20Svata%20krv%20Jezisova.mp3</location>
+			<duration>274188</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>4</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/4_Olivovy%20olej/06%20V%20Tvojich%20dvoranach.mp3</location>
+			<duration>264537</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>5</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/4_Olivovy%20olej/07%20Si%20Boh%20ktory%20uzdravuje.mp3</location>
+			<duration>251573</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>6</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/4_Olivovy%20olej/08%20Tvoje%20meno%20je%20med.mp3</location>
+			<duration>255355</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>7</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/4_Olivovy%20olej/09%20Moj%20Jezis%20si%20spasou.mp3</location>
+			<duration>280630</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>8</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/4_Olivovy%20olej/10%20Pane%20som%20tak%20velmi%20rad.mp3</location>
+			<duration>196850</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>9</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/4_Olivovy%20olej/11%20Otce%20zivota.mp3</location>
+			<duration>267197</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>10</vlc:id>
+			</extension>
+		</track>
+	</trackList>
+	<extension application="http://www.videolan.org/vlc/playlist/0">
+		<vlc:item tid="0"/>
+		<vlc:item tid="1"/>
+		<vlc:item tid="2"/>
+		<vlc:item tid="3"/>
+		<vlc:item tid="4"/>
+		<vlc:item tid="5"/>
+		<vlc:item tid="6"/>
+		<vlc:item tid="7"/>
+		<vlc:item tid="8"/>
+		<vlc:item tid="9"/>
+		<vlc:item tid="10"/>
+	</extension>
+</playlist>

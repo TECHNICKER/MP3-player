@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist xmlns="http://xspf.org/ns/0/" xmlns:vlc="http://www.videolan.org/vlc/playlist/ns/0/" version="1">
+	<title>Playlist</title>
+	<trackList>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/01%20Jezis%20Ty%20si.mp3</location>
+			<duration>218760</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>0</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/02%20Kazde%20rano%20ja%20chvalim.mp3</location>
+			<duration>264172</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>1</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/03%20Chvalim%20Ta%20pred%20tronom.mp3</location>
+			<duration>293020</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>2</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/04%20Tu%20stojim.mp3</location>
+			<duration>418872</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>3</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/05%20Pozehnani.mp3</location>
+			<duration>380947</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>4</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/06%20Spievat%20chcem%20o%20slave.mp3</location>
+			<duration>218813</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>5</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/07%20Otvor%20mi%20oci.mp3</location>
+			<duration>305201</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>6</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/08%20Ten%20vzduch%20ktory%20dycham.mp3</location>
+			<duration>335223</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>7</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/09%20Vyhlasujem%20Pane.mp3</location>
+			<duration>250034</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>8</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/10%20Hallelujah.mp3</location>
+			<duration>532647</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>9</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/11%20Modlim%20sa.mp3</location>
+			<duration>351420</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>10</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/6_Prid/12%20Prid.mp3</location>
+			<duration>208014</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>11</vlc:id>
+			</extension>
+		</track>
+	</trackList>
+	<extension application="http://www.videolan.org/vlc/playlist/0">
+		<vlc:item tid="0"/>
+		<vlc:item tid="1"/>
+		<vlc:item tid="2"/>
+		<vlc:item tid="3"/>
+		<vlc:item tid="4"/>
+		<vlc:item tid="5"/>
+		<vlc:item tid="6"/>
+		<vlc:item tid="7"/>
+		<vlc:item tid="8"/>
+		<vlc:item tid="9"/>
+		<vlc:item tid="10"/>
+		<vlc:item tid="11"/>
+	</extension>
+</playlist>

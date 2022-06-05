@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist xmlns="http://xspf.org/ns/0/" xmlns:vlc="http://www.videolan.org/vlc/playlist/ns/0/" version="1">
+	<title>Playlist</title>
+	<trackList>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/01%20Zosli%20ohen.mp3</location>
+			<duration>172880</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>0</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/02%20Dakujem.mp3</location>
+			<duration>301106</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>1</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/03%20Duch%20Panov%20je%20nado%20mnou.mp3</location>
+			<duration>429540</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>2</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/04%20Ved%20ma%20kazdy%20den.mp3</location>
+			<duration>260494</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>3</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/05%20Jak%20pusti%20dazd.mp3</location>
+			<duration>160125</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>4</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/06%20Vsetko%20je%20mozne%20v%20Nom.mp3</location>
+			<duration>237540</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>5</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/07%20Hosana.mp3</location>
+			<duration>407291</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>6</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/08%20Len%20Ty.mp3</location>
+			<duration>293124</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>7</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/09%20Tam%20na%20Golgotskom%20krizi.mp3</location>
+			<duration>376017</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>8</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/10%20Baranku%20moj.mp3</location>
+			<duration>253373</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>9</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/11%20Toto%20su%20dni%20Eliasa.mp3</location>
+			<duration>404578</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>10</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///C:/Users/LOGRIK/Music/Olivy/Sto%20Chvalospevov/1_To%20su%20dni%20poslednej%20zatvy/12%20Jezis%20o%20moj%20Jezis.mp3</location>
+			<duration>454345</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>11</vlc:id>
+			</extension>
+		</track>
+	</trackList>
+	<extension application="http://www.videolan.org/vlc/playlist/0">
+		<vlc:item tid="0"/>
+		<vlc:item tid="1"/>
+		<vlc:item tid="2"/>
+		<vlc:item tid="3"/>
+		<vlc:item tid="4"/>
+		<vlc:item tid="5"/>
+		<vlc:item tid="6"/>
+		<vlc:item tid="7"/>
+		<vlc:item tid="8"/>
+		<vlc:item tid="9"/>
+		<vlc:item tid="10"/>
+		<vlc:item tid="11"/>
+	</extension>
+</playlist>

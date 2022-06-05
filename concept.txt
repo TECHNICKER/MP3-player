@@ -1,6 +1,7 @@
 playing:
 
-OK    play/pause    space
+OK    play/stop     ENTER
+OK    play/(un)pause space
 OK    volume up       k
 OK    volume down     ,
 OK    mute            m
@@ -21,3 +22,7 @@ to do:
  tak aby f_music_file() 
  nevkládal path, ale Song
  objekty
+
+ *řešení pro funkčnost 
+ načítání přímo ze složky 
+ music je trochu hacky
