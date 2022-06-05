@@ -1,0 +1,23 @@
+playing:
+
+OK    play/pause    space
+OK    volume up       k
+OK    volume down     ,
+OK    mute            m
+
+    
+tracks:
+
+X    skip            n     
+X    back            b
+X    random          h
+X    repeat          j
+
+update:
+ Folder class plně funkční
+
+to do:
+ zprovoznit Song class,
+ tak aby f_music_file() 
+ nevkládal path, ale Song
+ objekty
