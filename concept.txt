@@ -16,12 +16,23 @@ X    repeat          j
 
 update:
  Folder class plně funkční
+ Song class plně funkční
 
 to do:
- zprovoznit Song class,
- tak aby f_music_file() 
- nevkládal path, ale Song
- objekty
+
+ přepsat f_music_file()
+ tak aby ukladala 
+ revese tree
+
+ změnit zpusob jakym Folder
+ pracuje s daty a 
+ build_playlist vraci data
+
+ udělat f_directories()
+ self-updating
+
+
+
 
  *řešení pro funkčnost 
  načítání přímo ze složky 

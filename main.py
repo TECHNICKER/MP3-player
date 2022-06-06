@@ -1,11 +1,14 @@
 import os
 import sys
-import music_tag
+from tkinter import N
+import music_tag as mtg
 import pygame as pg
 from pygame import mixer as mx
+from datetime import timedelta
 
 subdirectory_scan_limit = 2
 supported_formats = (".ogg", ".mp3", ".wav")
+character_whitelist = set("0123456789")
 volume = 0.5
 play = False
 pause = False
@@ -70,23 +73,108 @@ class Folder:
                 for format in supported_formats:
                     if item.is_file() == True and item.name.endswith(format):
                         if self.path == "music":
-                            Folder.playlist.append(item.path)
+                            Folder.playlist.append(Song(item.path))
                         else:
-                            self.songs.append(item.path)
+                            self.songs.append(Song(item.path))
 
         elif Folder.scanned_subdirectory_layers <= subdirectory_scan_limit:
             for subdir in self.subs:
                 for item in os.scandir(subdir.path):
                     for format in supported_formats:
                         if item.is_file() == True and item.name.endswith(format):
-                            subdir.songs.append(item.path)
+                            subdir.songs.append(Song(item.path))
                             
             Folder.scanned_subdirectory_layers += 1
+
+
+class Song:
+
+    def __init__(self, path):
+        self.path = path
+        self.number = ""
+        self.music_tag = mtg.load_file(self.path)
+        self.length = timedelta(seconds = int(self.music_tag["#length"]))
+
+        if path == "music":
+            self.parent = None
+        else:
+            self.parent = os.path.dirname(self.path)
+
+        if len(self.music_tag["tracktitle"]) >= 1:
+            self.title  = self.music_tag["tracktitle"]
+        else:
+            self.title = os.path.splitext(os.path.basename(self.path))[0]
+
+        if len(self.music_tag["albumartist"]) >= 1:
+            self.artist = self.music_tag["albumartist"]
+        else:
+            self.artist = "Unknown artist"
+
+        if len(self.music_tag["tracknumber"]) >= 1:
+            self.number = self.music_tag["tracknumber"]
+        else:
+            for char in self.title:
+                if char in character_whitelist:
+                    self.number += char
+            self.number = int(self.number)
 
 
 Folder.build_playlist()
 
 # testovací printy - je možné vyzkoušet se "Sto chvalospevov"
+
+
+# for folder in Folder.playlist:
+    
+#     print(folder.name)
+#     print(folder.path)
+#     print(folder.parent)
+#     print(folder.subs)
+#     for sub in folder.subs:
+#         print(sub.name)
+#         print(sub.path)
+#         print(sub.parent)
+#         print(sub.subs)
+#         print(sub.songs)
+#         for song in sub.songs:
+
+#             print(song.title)
+#             print(song.path)
+#             print(song.parent)
+#             print(song.artist)
+#             print(song.length)
+#             print(song.number)
+
+#     for song in folder.songs:
+
+#         print(song.title)
+#         print(song.path)
+#         print(song.parent)
+#         print(song.artist)
+#         print(song.length)
+#         print(song.number)
+
+
+# for song in Folder.playlist[0].songs: # pro Song class testing
+
+#     print(song)
+
+#     print(song.title)
+#     print(song.path)
+#     print(song.parent)
+#     print(song.artist)
+#     print(song.length)
+#     print(song.number)
+
+# pro jednu složku obsahující hudbu vloženou do music
+# print(Folder.playlist[0])
+# print(Folder.playlist[0].title)
+# print(Folder.playlist[0].path)
+# print(Folder.playlist[0].parent)
+# print(Folder.playlist[0].artist)
+# print(Folder.playlist[0].length)
+# print(Folder.playlist[0].number)
+
 
 # pro hudbu čistě ve složce music - tady budou velké změny
 # print(Folder.playlist)
@@ -98,6 +186,16 @@ Folder.build_playlist()
 # print(Folder.playlist[0].parent)
 # print(Folder.playlist[0].subs)
 # print(Folder.playlist[0].songs)
+
+
+# x = Folder.playlist[0].length
+# print (x)
+# print(type(x))
+
+# while x > timedelta(seconds = 0):
+#     x -= timedelta(seconds = 1)
+#     print(x)
+
 
 # for i in range(8): # range = max. počet složek pokud vložíme do music složeky s písněmi 
 #     print(Folder.playlist[i])
@@ -115,37 +213,6 @@ Folder.build_playlist()
 #     print(Folder.playlist[0].subs[i].songs)
 
 
-#tady bue Song class, ktera bude nejspis vnorena, nebo udelana jako classmethody ve Folder
-
-"""
-    # class Song:
-
-    #     def __init__(self, path):
-    #         self.path = path
-    #         self.length = None
-    #         self.title  = None
-    #         self.artist = None
-    #         self.number = None
-
-    #     @classmethod
-    #     def generate_song_objects(cls):
-    #         for folder in Folder.folders:
-    #             for song in folder.songs:
-    #                 pass 
-
-
-        # def f_length():
-        #     pass
-
-        # def f_title():
-        #     pass
-
-        # def f_artist():
-        #     pass
-
-        # def f_number():
-        #     pass
-"""
 
 def was_pressed(key, events):
     for event in events:
@@ -185,7 +252,7 @@ def was_pressed(key, events):
 # tady, a v ramci hlavni smycky, bude proper loading (+ preskakovani, apod.) system
 
 # testovaci pisnicka
-mx.music.load("music/10 O, MOJ BOH.mp3")
+# mx.music.load("music/10 O, MOJ BOH.mp3")
 
 while True:
     events = pg.event.get()
