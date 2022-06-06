@@ -28,6 +28,7 @@ pg.display.set_icon(icon)
 class Folder:
 
     playlist = []
+    update_list =[]
     scanned_subdirectory_layers = 0
 
     def __init__(self, name, path):
@@ -44,47 +45,83 @@ class Folder:
 
     @classmethod
     def build_playlist(cls):
-        Folder.f_directories()
-        if len(Folder.playlist) != 0:
-            for folder in Folder.playlist:
-                Folder.f_sub_directories(folder)
-                Folder.f_music_files(folder)
-        else:
-            Folder.f_music_files(Folder("music", "music"))
+
+        Folder.playlist = Folder.f_music_files()
+        Folder.playlist += Folder.f_directories()
+ 
+        for object in Folder.playlist:
+            if isinstance(object, Folder) == True:
+                object.songs = Folder.f_music_files(object.path)
+                object.subs = Folder.f_directories(object.path)
+
+
+
+        # Folder.f_directories()
+        # if len(Folder.playlist) != 0:
+        #     for folder in Folder.playlist:
+        #         Folder.f_sub_directories(folder)
+        #         Folder.f_music_files(folder)
+        # else:
+        #     Folder.f_music_files(Folder("music", "music"))
+        # return Folder.playlist
+    
+
+
     
     @classmethod
     def f_directories(cls, dir = "music"):
-        for item in os.scandir(dir):
-            if item.is_dir() == True and len(os.listdir(dir)) != 0:
-                Folder.playlist.append(Folder(item.name, item.path))
+        pass
+
+
+
+
+
+        # for item in os.scandir(dir):
+        #     if item.is_dir() == True and len(os.listdir(dir)) != 0:
+        #         Folder.update_list.append(Folder(item.name, item.path))
 
     def f_sub_directories(self):
-        for item in os.scandir(self.path):
-            if item.is_dir() == True:
-                self.subs.append(Folder(item.name, item.path))
+        self.songs = Folder.f_music_files(self.path)
+        self.subs = Folder.f_directories(self.path)
+        
 
-        if len(self.subs) != 0:
-            self.subs_exist = True
+
+
+
+        # for item in os.scandir(self.path):
+        #     if item.is_dir() == True:
+        #         self.subs.append(Folder(item.name, item.path))
+
+        # if len(self.subs) != 0:
+        #     self.subs_exist = True
 
     def f_music_files(self):
-        if self.subs_exist == False:
 
-            for item in os.scandir(self.path):
-                for format in supported_formats:
-                    if item.is_file() == True and item.name.endswith(format):
-                        if self.path == "music":
-                            Folder.playlist.append(Song(item.path))
-                        else:
-                            self.songs.append(Song(item.path))
 
-        elif Folder.scanned_subdirectory_layers <= subdirectory_scan_limit:
-            for subdir in self.subs:
-                for item in os.scandir(subdir.path):
-                    for format in supported_formats:
-                        if item.is_file() == True and item.name.endswith(format):
-                            subdir.songs.append(Song(item.path))
+
+        pass
+
+
+
+
+        # if self.subs_exist == False:
+
+        #     for item in os.scandir(self.path):
+        #         for format in supported_formats:
+        #             if item.is_file() == True and item.name.endswith(format):
+        #                 if self.path == "music":
+        #                     Folder.update_list.append(Song(item.path))
+        #                 else:
+        #                     self.songs.append(Song(item.path))
+
+        # elif Folder.scanned_subdirectory_layers <= subdirectory_scan_limit:
+        #     for subdir in self.subs:
+        #         for item in os.scandir(subdir.path):
+        #             for format in supported_formats:
+        #                 if item.is_file() == True and item.name.endswith(format):
+        #                     subdir.songs.append(Song(item.path))
                             
-            Folder.scanned_subdirectory_layers += 1
+        #     Folder.scanned_subdirectory_layers += 1
 
 
 class Song:
@@ -119,8 +156,8 @@ class Song:
             self.number = int(self.number)
 
 
-Folder.build_playlist()
-
+x = Folder.build_playlist()
+print(x)
 # testovací printy - je možné vyzkoušet se "Sto chvalospevov"
 
 
