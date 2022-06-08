@@ -1,6 +1,5 @@
 import os
 import sys
-from tkinter import N
 import music_tag as mtg
 import pygame as pg
 from pygame import mixer as mx
