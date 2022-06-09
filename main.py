@@ -13,10 +13,13 @@ play = False
 pause = False
 mute = False
 
+clock = pg.time.Clock()
 pg.init()
 pg.key.set_repeat(700, 100)
 mx.init()
 mx.music.set_volume(volume)
+play_pause = pg.image.load("resources/images/play_pause.png")
+
 
 display = pg.display.set_mode((500, 200))
 pg.display.set_caption("Music player")
@@ -133,7 +136,7 @@ class Song:
                     self.number += char
             self.number = int(self.number)
 
-
+"""
 x = Folder.build_playlist()
 print(x)
 # testovací printy - je možné vyzkoušet se "Sto chvalospevov"
@@ -226,7 +229,7 @@ print(x)
 #     print(Folder.playlist[0].subs[i].parent)
 #     print(Folder.playlist[0].subs[i].subs)
 #     print(Folder.playlist[0].subs[i].songs)
-
+"""
 
 
 def was_pressed(key, events):
@@ -268,6 +271,19 @@ def was_pressed(key, events):
 
 # testovaci pisnicka
 mx.music.load("music/10 O, MOJ BOH.mp3")
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 while True:
     events = pg.event.get()
@@ -329,5 +345,6 @@ while True:
         if volume < 0:
             volume = 0
 
+    clock.tick(60)
     mx.music.set_volume(volume)
 
