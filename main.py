@@ -21,7 +21,7 @@ mx.music.set_volume(volume)
 
 display = pg.display.set_mode((500, 200))
 pg.display.set_caption("Music player")
-icon = pg.image.load("logo/player.png")
+icon = pg.image.load("resources/images/player.png")
 pg.display.set_icon(icon)    
 
 
