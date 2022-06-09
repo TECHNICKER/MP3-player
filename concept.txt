@@ -22,11 +22,11 @@ to do:
 
  přepsat f_music_file()
  tak aby ukladala 
- revese tree
+ revese tree (možná ne?)
 
- změnit zpusob jakym Folder
- pracuje s daty a 
- build_playlist vraci data
+ změnit způsob jakym Folder
+ pracuje s daty
+ (funkce buduou vrace listy)
 
  udělat f_directories()
  self-updating
