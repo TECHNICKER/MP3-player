@@ -18,8 +18,6 @@ pg.init()
 pg.key.set_repeat(700, 100)
 mx.init()
 mx.music.set_volume(volume)
-play_pause = pg.image.load("resources/images/play_pause.png")
-
 
 display = pg.display.set_mode((500, 200))
 pg.display.set_caption("Music player")
@@ -271,19 +269,6 @@ def was_pressed(key, events):
 
 # testovaci pisnicka
 mx.music.load("music/10 O, MOJ BOH.mp3")
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 while True:
     events = pg.event.get()
