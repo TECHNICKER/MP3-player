@@ -37,3 +37,13 @@ to do:
  *řešení pro funkčnost 
  načítání přímo ze složky 
  music je trochu hacky
+
+
+
+
+
+ pro button_handling()
+ nejde reagovat na stisk
+
+ udelat flif flop moznost
+ pro mute

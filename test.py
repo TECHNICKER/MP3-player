@@ -11,7 +11,12 @@ play_pause = UI.Button(("resources/images/play_pause.png", "resources/images/pla
 list = UI.Button(("resources/images/list.png", "resources/images/list_c.png"), (20, 80), (48, 48))
 forward = UI.Button(("resources/images/forward.png", "resources/images/forward_c.png"), (20, 120), (48, 48))
 backward = UI.Button(("resources/images/backward.png", "resources/images/backward_c.png"), (20, 160), (48, 48))
+mute = UI.Button(("resources/images/mute.png", "resources/images/mute_c.png"), (450, 160), (48, 48))
 fill = pg.transform.scale(pg.image.load("resources/images/fill.png"), (48, 48))
+
+# pg.mixer.init()
+# pg.mixer.music.set_volume(0.5)
+# pg.mixer.music.load("music/10 O, MOJ BOH.mp3")
 
 while True:
     events = pg.event.get()
@@ -25,5 +30,8 @@ while True:
         button.button_handling()
         display.blit(fill, button.coords)
         display.blit(button.active_surface, button.coords)
+
+    # if play_pause.button_handling() == True:
+    #     pg.mixer.music.play()
  
     pg.display.flip()
