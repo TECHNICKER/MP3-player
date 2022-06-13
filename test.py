@@ -1,6 +1,3 @@
-# import os
-# import music_tag
-from operator import is_
 import sys
 import pygame as pg
 
@@ -8,14 +5,6 @@ display = pg.display.set_mode((500, 200))
 pg.display.set_caption("Music player")
 icon = pg.image.load("resources/images/player.png")
 pg.display.set_icon(icon)  
-
-# files = []
-
-# for file in os.scandir("music"):
-#     files.append(file)
-
-# music_tag
-# pg.init()
 
 class Button:
 
@@ -39,7 +28,7 @@ class Button:
         Button.buttons.append(self)
 
 
-    def was_clicked(self):
+    def button_handling(self) -> bool: 
         if self.rect.collidepoint(pg.mouse.get_pos()) == True and pg.mouse.get_pressed(num_buttons = 3)[0] == True:
             self.current_state = True
         else:
@@ -60,55 +49,23 @@ class Button:
         else:
             self.previous_state = self.current_state
             return False
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 
 # volume_icon = pg.transform.scale(pg.image.load("resources/images/volume.png"), (48, 48))
-
-# def is_in_rect(object, coords):
-#     if object.collidepoint(coords) == True:
-#         return True
-#     else:
-#         return False
 
 play_pause = Button(("resources/images/play_pause.png", "resources/images/play_pause_c.png"), (20, 20), (48, 48))
 list = Button(("resources/images/list.png", "resources/images/list_c.png"), (20, 80), (48, 48))
 forward = Button(("resources/images/forward.png", "resources/images/forward_c.png"), (20, 120), (48, 48))
 backward = Button(("resources/images/backward.png", "resources/images/backward_c.png"), (20, 160), (48, 48))
 
-
-
 while True:
     events = pg.event.get()
-    # program exit_enable
+
     for event in events:
         if event.type == pg.QUIT:
             pg.quit()
             sys.exit()
 
-    # for button in Button.buttons:
-    #     button.was_clicked()
-
-    play_pause.was_clicked()
-
-    # if is_in_rect(play_pause_rect, pg.mouse.get_pos()) == True and pg.mouse.get_pressed(num_buttons = 3)[0] == True:
-    #     display.blit(play_pause_c,(20, 20))
-
-    # else:
-    #     display.blit(play_pause,(20, 20))
-
-    
+    for button in Button.buttons:
+        button.button_handling()
+ 
     pg.display.flip()
