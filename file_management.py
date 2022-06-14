@@ -9,7 +9,7 @@ class Folder:
     supported_formats = (".ogg", ".mp3", ".wav")
 
     playlist = []
-    update_list =[]
+    update_list = []
     scanned_subdirectory_layers = 0
 
     def __init__(self, name, path):
@@ -33,7 +33,7 @@ class Folder:
                 Folder.f_music_files(folder)
         else:
             Folder.f_music_files(Folder("music", "music"))
-        return Folder.playlist
+        return Folder.update_list
 
         # Folder.playlist = Folder.f_music_files()
         # Folder.playlist += Folder.f_directories()
@@ -43,8 +43,6 @@ class Folder:
         #         object.songs = Folder.f_music_files(object.path)
         #         object.subs = Folder.f_directories(object.path)
     
-
-
     
     @classmethod
     def f_directories(cls, dir = "music"):
@@ -100,7 +98,7 @@ class Song:
             self.parent = os.path.dirname(self.path)
 
         if len(self.music_tag["tracktitle"]) >= 1:
-            self.title  = self.music_tag["tracktitle"]
+            self.title  = str(self.music_tag["tracktitle"])
         else:
             self.title = os.path.splitext(os.path.basename(self.path))[0]
 
