@@ -1,4 +1,5 @@
 import os
+from turtle import update
 import music_tag as mtg
 from datetime import timedelta
 
@@ -10,6 +11,7 @@ class Folder:
 
     playlist = []
     update_list = []
+    song_list = []
     scanned_subdirectory_layers = 0
 
     def __init__(self, name, path):
@@ -23,6 +25,20 @@ class Folder:
         self.subs = []
         self.songs = []
 
+    @classmethod
+    def get_songs(cls, list):
+        for object in list:
+            if isinstance(object, Song) and object not in Folder.song_list:
+                Folder.song_list.append(object)
+
+            elif isinstance(object, Folder):
+                for song in object.songs:
+                    if song not in Folder.song_list:
+                        Folder.song_list.append(song)
+                
+                for sub in object.subs:
+                    Folder.get_songs(sub)
+                
 
     @classmethod
     def build_playlist(cls):
@@ -33,7 +49,11 @@ class Folder:
                 Folder.f_music_files(folder)
         else:
             Folder.f_music_files(Folder("music", "music"))
+
         return Folder.update_list
+        
+                
+
 
         # Folder.playlist = Folder.f_music_files()
         # Folder.playlist += Folder.f_directories()

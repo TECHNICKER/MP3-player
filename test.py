@@ -23,7 +23,9 @@ pause = False
 stop = False
 mute = False
 buttons = []
-playlist = FM.Folder.build_playlist()
+folder_scan = FM.Folder.build_playlist()
+FM.Folder.get_songs(folder_scan)
+playlist = FM.Folder.song_list
 
 play_pause = UI.Button(("resources/images/play_pause.png", "resources/images/play_pause_c.png"), (10, 145), (48, 48))
 stop = UI.Button(("resources/images/stop.png", "resources/images/stop_C.png"), (10, 97), (48, 48))
@@ -32,9 +34,10 @@ backward = UI.Button(("resources/images/backward.png", "resources/images/backwar
 volume_up = UI.Button(("resources/images/volume+.png", "resources/images/volume+_c.png"), (450, 54), (48, 48))
 volume_down = UI.Button(("resources/images/volume-.png", "resources/images/volume-_c.png"), (450, 102), (48, 48))
 mute = UI.Button(("resources/images/mute.png", "resources/images/mute_c.png"), (450, 150), (48, 48), True)
+update_playlist = UI.Button(("resources/images/list.png", "resources/images/list_c.png"), (450, 6), (48, 48))
 # list = UI.Button(("resources/images/list.png", "resources/images/list_c.png"), (20, 80), (48, 48))
 
-buttons.extend([play_pause, stop, forward, backward, volume_up, volume_down, mute])
+buttons.extend([play_pause, stop, forward, backward, volume_up, volume_down, mute, update_playlist])
 fill = pg.transform.scale(pg.image.load("resources/images/fill.png"), (48, 48))
 fill_big = pg.transform.scale(fill, (300, 100))
 
@@ -106,6 +109,9 @@ def debouncer(passed_button, method):
 
             if volume_value < 0:
                 volume_value = 0
+
+        elif method == "update_playlist":
+            playlist_update()
         
 
     elif passed_button.previous_state == True and passed_button.current_state == False:
@@ -148,6 +154,13 @@ def flip_flop(passed_button, method):
 
     else:
         passed_button.previous_state = passed_button.current_state
+
+def playlist_update():
+    global playlist
+
+    scanned_folders = FM.Folder.build_playlist()
+    FM.Folder.get_songs(scanned_folders)
+    playlist = FM.Folder.song_list
 
 
 while True:
@@ -193,6 +206,9 @@ while True:
 
         elif button == buttons[6]:
             flip_flop(button, "mute")
+
+        elif button == buttons[7]:
+            debouncer(button, "update_playlist")  
 
     mx.music.set_volume(volume_value)
     clock.tick(60)
