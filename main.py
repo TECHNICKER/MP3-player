@@ -1,331 +1,219 @@
+import UI
 import sys
 import pygame as pg
 from pygame import mixer as mx
-import file_management
-import UI
+import file_management as FM
 
-volume = 0.5
-play = False
-pause = False
-mute = False
-
-clock = pg.time.Clock()
 pg.init()
-pg.key.set_repeat(700, 100)
 mx.init()
-mx.music.set_volume(volume)
-
 display = pg.display.set_mode((500, 200))
 pg.display.set_caption("Music player")
 icon = pg.image.load("resources/images/player.png")
-pg.display.set_icon(icon)    
+pg.display.set_icon(icon)  
+clock = pg.time.Clock()
+pg.font.init()
+Consolas = pg.font.SysFont("Consolas", 20)
+
+loaded_song_number = 0
+song_playing = False
+volume_value = 0.5
+prev_volume = volume_value
+play = False
+pause = False
+stop = False
+mute = False
+buttons = []
+
+play_pause = UI.Button(("resources/images/play_pause.png", "resources/images/play_pause_c.png"), (10, 145), (48, 48))
+stop = UI.Button(("resources/images/stop.png", "resources/images/stop_C.png"), (10, 97), (48, 48))
+forward = UI.Button(("resources/images/forward.png", "resources/images/forward_c.png"), (10, 49), (48, 48))
+backward = UI.Button(("resources/images/backward.png", "resources/images/backward_c.png"), (10, 1), (48, 48))
+volume_up = UI.Button(("resources/images/volume+.png", "resources/images/volume+_c.png"), (450, 54), (48, 48))
+volume_down = UI.Button(("resources/images/volume-.png", "resources/images/volume-_c.png"), (450, 102), (48, 48))
+mute = UI.Button(("resources/images/mute.png", "resources/images/mute_c.png"), (450, 150), (48, 48), True)
+update_playlist = UI.Button(("resources/images/list.png", "resources/images/list_c.png"), (450, 6), (48, 48))
+
+buttons.extend([play_pause, stop, forward, backward, volume_up, volume_down, mute, update_playlist])
+fill = pg.transform.scale(pg.image.load("resources/images/fill.png"), (48, 48))
+fill_big = pg.transform.scale(fill, (340, 100))
 
 
-# class Folder:
+def debouncer(passed_button, method):
+    global playlist
+    global song_playing
+    global loaded_song_number
+    global play
+    global pause
+    global stop
+    global volume_value
+    global mute
+    global prev_volume
 
-#     playlist = []
-#     update_list =[]
-#     scanned_subdirectory_layers = 0
+    if passed_button.previous_state == False and passed_button.current_state == True:
+        passed_button.previous_state = passed_button.current_state
+        passed_button.active_surface = passed_button.surface_c
 
-#     def __init__(self, name, path):
-#         self.name = name
-#         self.path = path
-#         if path == "music":
-#             self.parent = None
-#         else:
-#             self.parent = os.path.dirname(self.path)
-#         self.subs_exist = False
-#         self.subs = []
-#         self.songs = []
+        if method == "play_pause":
 
+            if play == False and (pause == False or stop == True) and len(playlist) > 1:
+                mx.music.play()
+                play = True
+                stop = False
 
-#     @classmethod
-#     def build_playlist(cls):
-#         Folder.f_directories()
-#         if len(Folder.playlist) != 0:
-#             for folder in Folder.playlist:
-#                 Folder.f_sub_directories(folder)
-#                 Folder.f_music_files(folder)
-#         else:
-#             Folder.f_music_files(Folder("music", "music"))
-#         return Folder.playlist
+            elif pause == False:
+                mx.music.pause()
+                pause = True
+                play = False
 
-#         # Folder.playlist = Folder.f_music_files()
-#         # Folder.playlist += Folder.f_directories()
- 
-#         # for object in Folder.playlist:
-#         #     if isinstance(object, Folder) == True:
-#         #         object.songs = Folder.f_music_files(object.path)
-#         #         object.subs = Folder.f_directories(object.path)
-    
+            elif pause == True:
+                mx.music.unpause()
+                pause = False
+                play = True
 
+        elif method == "stop":
+            
+            if play == True or pause == True:
+                mx.music.stop()
+                play = False
+                stop = True
 
-    
-#     @classmethod
-#     def f_directories(cls, dir = "music"):
-#         for item in os.scandir(dir):
-#             if item.is_dir() == True and len(os.listdir(dir)) != 0:
-#                 Folder.update_list.append(Folder(item.name, item.path))
+        elif method == "forward":
+            play = False
+            if loaded_song_number + 1 > len(playlist) - 1:
+                loaded_song_number = 0
+            else:
+                loaded_song_number += 1
+            
 
-#     def f_sub_directories(self):
-#         for item in os.scandir(self.path):
-#             if item.is_dir() == True:
-#                 self.subs.append(Folder(item.name, item.path))
+        elif method == "backward":
+            play = False
+            if loaded_song_number - 1 < 0:
+                loaded_song_number = len(playlist) - 1
+            else:
+                loaded_song_number -= 1
 
-#         if len(self.subs) != 0:
-#             self.subs_exist = True
+        elif method == "volume_up":
+            volume_value += 0.05
 
-#         # self.songs = Folder.f_music_files(self.path)
-#         # self.subs = Folder.f_directories(self.path)
+            if volume_value > 1:
+                volume_value = 1
 
-#     def f_music_files(self):
-#         if self.subs_exist == False:
+            mute = False
+            prev_volume = volume_value
 
-#             for item in os.scandir(self.path):
-#                 for format in supported_formats:
-#                     if item.is_file() == True and item.name.endswith(format):
-#                         if self.path == "music":
-#                             Folder.update_list.append(Song(item.path))
-#                         else:
-#                             self.songs.append(Song(item.path))
+        elif method == "volume_down":
+            volume_value -= 0.05
 
-#         elif Folder.scanned_subdirectory_layers <= subdirectory_scan_limit:
-#             for subdir in self.subs:
-#                 for item in os.scandir(subdir.path):
-#                     for format in supported_formats:
-#                         if item.is_file() == True and item.name.endswith(format):
-#                             subdir.songs.append(Song(item.path))
-                            
-#             Folder.scanned_subdirectory_layers += 1
+            if volume_value < 0:
+                volume_value = 0
 
+        elif method == "update_playlist":
+            playlist_update()
+        
 
-# class Song:
+    elif passed_button.previous_state == True and passed_button.current_state == False:
+        passed_button.previous_state = passed_button.current_state
+        passed_button.active_surface = passed_button.surface
 
-#     def __init__(self, path):
-#         self.path = path
-#         self.number = ""
-#         self.music_tag = mtg.load_file(self.path)
-#         self.length = timedelta(seconds = int(self.music_tag["#length"]))
+    else:
+        passed_button.previous_state = passed_button.current_state
 
-#         if path == "music":
-#             self.parent = None
-#         else:
-#             self.parent = os.path.dirname(self.path)
+def flip_flop(passed_button, method):
 
-#         if len(self.music_tag["tracktitle"]) >= 1:
-#             self.title  = self.music_tag["tracktitle"]
-#         else:
-#             self.title = os.path.splitext(os.path.basename(self.path))[0]
+    global prev_volume
+    global volume_value
+    global mute
 
-#         if len(self.music_tag["albumartist"]) >= 1:
-#             self.artist = self.music_tag["albumartist"]
-#         else:
-#             self.artist = "Unknown artist"
-
-#         if len(self.music_tag["tracknumber"]) >= 1:
-#             self.number = self.music_tag["tracknumber"]
-#         else:
-#             for char in self.title:
-#                 if char in character_whitelist:
-#                     self.number += char
-#             self.number = int(self.number)
-
-"""
-x = Folder.build_playlist()
-print(x)
-# testovací printy - je možné vyzkoušet se "Sto chvalospevov"
+    if volume_value < 0.05:
+        passed_button.active_surface = passed_button.surface_c
+    else:
+        passed_button.active_surface = passed_button.surface
 
 
-# for folder in Folder.playlist:
-    
-#     print(folder.name)
-#     print(folder.path)
-#     print(folder.parent)
-#     print(folder.subs)
-#     for sub in folder.subs:
-#         print(sub.name)
-#         print(sub.path)
-#         print(sub.parent)
-#         print(sub.subs)
-#         print(sub.songs)
-#         for song in sub.songs:
+    if passed_button.previous_state == False and passed_button.current_state == True and passed_button.flip_state != True:
+        passed_button.previous_state = passed_button.current_state
+        passed_button.active_surface = passed_button.surface
+        passed_button.flip_state = True
 
-#             print(song.title)
-#             print(song.path)
-#             print(song.parent)
-#             print(song.artist)
-#             print(song.length)
-#             print(song.number)
-
-#     for song in folder.songs:
-
-#         print(song.title)
-#         print(song.path)
-#         print(song.parent)
-#         print(song.artist)
-#         print(song.length)
-#         print(song.number)
+        if method == "mute":
+                volume_value = prev_volume
 
 
-# for song in Folder.playlist[0].songs: # pro Song class testing
+    elif passed_button.previous_state == False and passed_button.current_state == True and passed_button.flip_state == True:
+        passed_button.previous_state = passed_button.current_state
+        passed_button.active_surface = passed_button.surface_c
+        passed_button.flip_state = False
 
-#     print(song)
-
-#     print(song.title)
-#     print(song.path)
-#     print(song.parent)
-#     print(song.artist)
-#     print(song.length)
-#     print(song.number)
-
-# pro jednu složku obsahující hudbu vloženou do music
-# print(Folder.playlist[0])
-# print(Folder.playlist[0].title)
-# print(Folder.playlist[0].path)
-# print(Folder.playlist[0].parent)
-# print(Folder.playlist[0].artist)
-# print(Folder.playlist[0].length)
-# print(Folder.playlist[0].number)
+        if method == "mute":
+            prev_volume = volume_value
+            volume_value = 0
 
 
-# pro hudbu čistě ve složce music - tady budou velké změny
-# print(Folder.playlist)
+    else:
+        passed_button.previous_state = passed_button.current_state
 
-# pro jednu složku obsahující hudbu vloženou do music
-# print(Folder.playlist[0])
-# print(Folder.playlist[0].name)
-# print(Folder.playlist[0].path)
-# print(Folder.playlist[0].parent)
-# print(Folder.playlist[0].subs)
-# print(Folder.playlist[0].songs)
+def playlist_update():
+    global playlist
 
+    scanned_folders = FM.Folder.build_playlist()
+    FM.Folder.get_songs(scanned_folders)
+    playlist = FM.Folder.song_list
 
-# x = Folder.playlist[0].length
-# print (x)
-# print(type(x))
-
-# while x > timedelta(seconds = 0):
-#     x -= timedelta(seconds = 1)
-#     print(x)
-
-
-# for i in range(8): # range = max. počet složek pokud vložíme do music složeky s písněmi 
-#     print(Folder.playlist[i])
-#     print(Folder.playlist[i].name)
-#     print(Folder.playlist[i].path)
-#     print(Folder.playlist[i].parent)
-#     print(Folder.playlist[i].subs)
-#     print(Folder.playlist[i].songs)
-
-# for i in range (8): # range = max. číslo vnočených složek pokud vložíme do music složeku obsahující složky s písněmi
-#     print(Folder.playlist[0].subs[i].name)
-#     print(Folder.playlist[0].subs[i].path)
-#     print(Folder.playlist[0].subs[i].parent)
-#     print(Folder.playlist[0].subs[i].subs)
-#     print(Folder.playlist[0].subs[i].songs)
-"""
-
-
-def was_pressed(key, events):
-    for event in events:
-        if event.type == pg.KEYDOWN:
-                if event.key == pg.K_SPACE and key == "SPACE":
-                    return True
-
-                elif event.key == pg.K_RETURN and key == "ENTER":
-                    return True
-
-                elif event.key == pg.K_n and key == "N":
-                    return True
-
-                elif event.key == pg.K_b and key == "B":
-                    return True
-
-                elif event.key == pg.K_k and key == "K":
-                    return True
-
-                elif event.key == pg.K_m and key == "M":
-                    return True
-
-                elif event.key == pg.K_l and key == "L":
-                    return True
-
-                elif event.key == pg.K_j and key == "J":
-                    return True
-
-                elif event.key == pg.K_h and key == "H":
-                    return True
-                
-                elif event.key == pg.K_COMMA and key == "COMMA":
-                    return True
-        else:
-            return False
-
-# tady, a v ramci hlavni smycky, bude proper loading (+ preskakovani, apod.) system
-
-# testovaci pisnicka
-mx.music.load("music/10 O, MOJ BOH.mp3")
+playlist_update()
 
 while True:
+
+    if len(playlist) > 0:
+        loaded_song = playlist[loaded_song_number]
+        if play == False:
+            mx.music.load(loaded_song.path)
+    
+        display.blit(fill_big, (100, 80))
+        title = Consolas.render(loaded_song.title, False, (255, 255, 255))
+        display.blit(title, (100, 80))
+    else:
+        display.blit(fill_big, (100, 80))
+        title = Consolas.render("no songs loaded", False, (255, 255, 255))
+        display.blit(title, (100, 80))
+
+    pg.display.flip()
+    
     events = pg.event.get()
-    # program exit_enable
+
     for event in events:
         if event.type == pg.QUIT:
             pg.quit()
             sys.exit()
-    # play-stop
-    if was_pressed("ENTER", events) == True:
-        if play == False:
-            mx.music.play()
-            play = True
-            pause = False
 
-        elif play == True:
-            mx.music.stop()
-            play = False
-            pause = False
-    # pause-unpause
-    elif was_pressed("SPACE", events) == True:
-        if play == False and pause == False:
-            mx.music.play()
-            play = True
+    for button in buttons:
+        button.button_handling()
+        display.blit(fill, button.coords)
+        display.blit(button.active_surface, button.coords)
 
-        elif pause == False:
-            mx.music.pause()
-            pause = True
-            play = False
-
-        elif pause == True:
-            mx.music.unpause()
-            pause = False
-            play = True
-    # mute-unmute
-    elif was_pressed("M", events) == True:
-        if mute == False:
-            prev_volume = volume
-            volume = 0
-            mute = True
+        if button == buttons[0]:
+            debouncer(button, "play_pause")
         
-        elif mute == True:
-            volume = prev_volume
-            mute = False
-    # volume up
-    elif was_pressed("K", events) == True:
-        volume += 0.05
+        elif button == buttons[1]:
+            debouncer(button, "stop")
 
-        if volume > 1:
-            volume = 1
+        elif button == buttons[2]:
+            debouncer(button, "forward")
 
-        mute = False
-        prev_volume = volume
+        elif button == buttons[3]:
+            debouncer(button, "backward") 
 
-    #volume down
-    elif was_pressed("COMMA", events) == True:
-        volume -= 0.05
+        elif button == buttons[4]:
+            debouncer(button, "volume_up")
 
-        if volume < 0:
-            volume = 0
+        elif button == buttons[5]:
+            debouncer(button, "volume_down")
 
+        elif button == buttons[6]:
+            flip_flop(button, "mute")
+
+        elif button == buttons[7]:
+            debouncer(button, "update_playlist")  
+
+    mx.music.set_volume(volume_value)
     clock.tick(60)
-    mx.music.set_volume(volume)
-
+    pg.display.flip()

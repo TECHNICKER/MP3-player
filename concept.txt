@@ -15,10 +15,9 @@ X    random          h
 X    repeat          j
 
 update:
- vesměs to funguje,
+ v podstatě funkční
  -při přepínání tracků
  nezačne samo přehrávání
- -kód jak mamčiny špagety
  -UI nekompletní
 
 
@@ -33,10 +32,3 @@ to do:
  (funkce buduou vrace listy)
   -a smysluplně si předávat
    data
-
-
- *řešení pro funkčnost 
- načítání přímo ze složky 
- music je trochu hacky
-    -ale je jedinný co 
-    momentálně funguje
