@@ -34,10 +34,6 @@ to do:
   -a smysluplně si předávat
    data
 
- udělat f_directories()
- self-updating
-
-
 
  *řešení pro funkčnost 
  načítání přímo ze složky 
